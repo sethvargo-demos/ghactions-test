@@ -7,11 +7,74 @@ jobs:
     name: My Job
     runs-on: self-hosted
     steps:
-      - name: Print a greeting
+      - name: Install a thing
         env:
-          MY_VAR: Hi there! My name is
-          FIRST_NAME: Mona
-          MIDDLE_NAME: The
-          LAST_NAME: Octocat
+          DEBIAN_FRONTEND: noninteractive
         run: |
-          echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
+          sudo apt-get install -yqq neovim
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: See env
+        run: |
+          env
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            files/
+          key: ${{ runner.os }}-cache
+
+      - name: Do exists
+        run: |
+          ls -al files/
+          cat files/bar || true
+
+      - name: Create file
+        run: |
+          mkdir files/
+          echo "foo" > files/bar
+          echo "foo" > files/baz
+
+      - name: Wait
+        run: |
+          sleep 30
+
+  my-other-job:
+    name: My Other Job
+    runs-on: self-hosted
+    steps:
+      - name: Install a thing
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo apt-get install -yqq neovim
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: See env
+        run: |
+          env
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            files/
+          key: ${{ runner.os }}-cache
+
+      - name: Do exists
+        run: |
+          ls -al files/
+          cat files/bar || true
+
+      - name: Create file
+        run: |
+          mkdir files/
+          echo "foo" > files/bar
+          echo "foo" > files/baz
+
+      - name: Wait
+        run: |
+          sleep 30

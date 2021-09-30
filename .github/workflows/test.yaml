@@ -19,28 +19,12 @@ jobs:
       - name: See env
         run: |
           env
-
-      - uses: actions/cache@v2
-        with:
-          path: |
-            files/
-          key: ${{ runner.os }}-cache
-
-      - name: Do exists
-        run: |
-          ls -al files/ || true
-          cat files/bar || true
-
+          
       - name: Create file
         run: |
           mkdir files/
           echo "foo" > files/bar
           echo "foo" > files/baz
-
-
-      - name: Wait
-        run: |
-          sleep 30
 
   my-other-job:
     name: My Other Job
@@ -59,23 +43,8 @@ jobs:
         run: |
           env
 
-      - uses: actions/cache@v2
-        with:
-          path: |
-            files/
-          key: ${{ runner.os }}-cache
-
       - name: Do exists
         run: |
           ls -al files/ || true
           cat files/bar || true
-
-      - name: Create file
-        run: |
-          mkdir files/
-          echo "foo" > files/bar
-          echo "foo" > files/baz
-
-      - name: Wait
-        run: |
-          sleep 30
+          

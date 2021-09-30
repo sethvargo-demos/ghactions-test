@@ -37,6 +37,7 @@ jobs:
           echo "foo" > files/bar
           echo "foo" > files/baz
 
+
       - name: Wait
         run: |
           sleep 30

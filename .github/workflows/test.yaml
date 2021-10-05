@@ -23,7 +23,7 @@ jobs:
       - name: Create file
         run: |
           mkdir files/
-          echo "food" > files/bar
+          echo "foo" > files/bar
           echo "foo" > files/baz
 
   my-other-job:
